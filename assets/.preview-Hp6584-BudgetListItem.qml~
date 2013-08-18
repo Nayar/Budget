@@ -1,0 +1,46 @@
+import bb.cascades 1.0
+
+Container {
+    id: listItemContainer
+    //property alias name: nameLabel.text
+    //property alias amount: amountLabel.text
+    //property alias image: itemImage.imageSource
+    
+	layout: StackLayout {
+        orientation: LayoutOrientation.LeftToRight
+    }
+	
+	horizontalAlignment: HorizontalAlignment.Fill
+	
+	ImageView {
+	    id: itemImage
+        layoutProperties: StackLayoutProperties {
+            //spaceQuota: 1 // This is so the other components will take up the rest of the space
+        }
+        horizontalAlignment: HorizontalAlignment.Left
+        preferredWidth: 0
+	}
+	
+	Container {
+	    horizontalAlignment: HorizontalAlignment.Left
+		Label {
+		    id: nameLabel
+		}
+		Label {
+		    id: amountLabel
+		    textStyle {
+		        base: SystemDefaults.TextStyles.SubtitleText
+		    }
+		}
+	}
+	
+    ImageView {
+        id: deleteImage
+        imageSource: "asset:///images/delete.png"
+        layoutProperties: StackLayoutProperties {
+            spaceQuota: 1 // This is so the other components will take up the rest of the space
+        }
+        horizontalAlignment: HorizontalAlignment.Right
+        preferredWidth: 0
+    }
+}
