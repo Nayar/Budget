@@ -86,7 +86,8 @@ Page {
                     sortingKeys: ["name", "amount"]
                     
                     onItemAdded: {
-                        updateOverviewPage();
+                        // This is handled in the addButton's onClick method instead, so that it takes into account adding to multiple months.
+                        //updateOverviewPage();
                     }
                     
                     onItemRemoved: {
@@ -184,6 +185,8 @@ Page {
                         } else if (type == "income") {
                             _budgetApp.addIncome(nameAdd.text, amountAdd.text, "asset:///images/default.png", Qt.incomesMonthYearDropDowns.selectedMonth, Qt.incomesMonthYearDropDowns.selectedYear, monthRange.selectedMonth, yearRange.selectedValue)
                         }
+
+                        updateOverviewPage();
                     }
                 }
                 
