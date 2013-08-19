@@ -45,19 +45,14 @@ Page {
             ]
             
             onTriggered: {
-                // Only select one at a time
-                if (!isSelected(indexPath)) {
+                toggleSelection(indexPath);
+
+                // If they selected another item, clear all selections and re-select the last one they selected
+                if (selectionList().length > 1) {
                     clearSelection();
                     toggleSelection(indexPath);
-                    editButton.opacity = 1;
-                    monthRange.month.enabled = false;
-                    yearRange.enabled = false;
-                } else {
-                    toggleSelection(indexPath);
-                    editButton.opacity = 0;
-                    monthRange.month.enabled = true;
-                    yearRange.enabled = true;
                 }
+
             }
             
             onSelectionChanged: {
@@ -66,6 +61,7 @@ Page {
                     nameAdd.text = chosenItem.name;
                     amountAdd.text = chosenItem.amount;
                     addContainer.image = chosenItem.imagepath;
+                    editButton.opacity = 1;
                     monthRange.month.enabled = false;
                     yearRange.enabled = false;
                 } else {
