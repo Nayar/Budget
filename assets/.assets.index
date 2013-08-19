@@ -1,5 +1,5 @@
 1
-17
+19
 BudgetListItem.qml
 BudgetListPage.qml
 images/add.png
@@ -9,6 +9,8 @@ images/default.png
 images/delete.png
 images/done.png
 images/edit.png
+images/home.png
+images/notes.png
 main.qml
 MonthDropDown.qml
 MonthYearFilter.qml

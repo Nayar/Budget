@@ -13,6 +13,8 @@ TabbedPane {
     Tab {
         title: "Overview"
         id: overviewTab
+        imageSource: "asset:///images/home.png";
+
         OverviewPage {
             id: overviewPage
             currentMonthExpenses: _budgetApp.getMonthExpenseAmount(currentMonth, currentYear)
@@ -24,6 +26,8 @@ TabbedPane {
     
     Tab {
         title: "Monthly Expenses"
+        imageSource: "asset:///images/notes.png"
+
 		BudgetListPage {
             id: expensesPage
             objectName: "expensesPage"
@@ -33,6 +37,8 @@ TabbedPane {
     
     Tab {
         title: "Monthly Income"
+        imageSource: "asset:///images/notes.png"
+
 		BudgetListPage {
 		    id: incomesPage
 		    objectName: "incomesPage"

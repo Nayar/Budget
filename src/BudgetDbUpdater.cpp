@@ -17,35 +17,36 @@ BudgetDbUpdater::~BudgetDbUpdater() {
 
 bool BudgetDbUpdater::toV2()
 {
-	mDb.transaction();
-
-	QString query =	"CREATE TABLE IF NOT EXISTS month (\n"
-					"	id INTEGER PRIMARY KEY,\n"
-					"	month INTEGER,\n"
-					"	year INTEGER,\n"
-					"	UNIQUE (month, year)\n"
-					")";
-	if (!queryDatabase(query)) {
-		mDb.rollback();
-		return false;
-	}
-
-	query = "ALTER TABLE expense\n"
-			"ADD COLUMN month INTEGER REFERENCES month (id) ON DELETE CASCADE";
-	if (!queryDatabase(query)) {
-		mDb.rollback();
-		return false;
-	}
-
-	query = "ALTER TABLE income\n"
-			"ADD COLUMN month INTEGER REFERENCES month (id) ON DELETE CASCADE";
-	if (!queryDatabase(query)) {
-		mDb.rollback();
-		return false;
-	}
-
-	mDb.commit();
-	return true;
+	// TODO: This is sample code for when there is a version 2 of the database
+//	mDb.transaction();
+//
+//	QString query =	"CREATE TABLE IF NOT EXISTS month (\n"
+//					"	id INTEGER PRIMARY KEY,\n"
+//					"	month INTEGER,\n"
+//					"	year INTEGER,\n"
+//					"	UNIQUE (month, year)\n"
+//					")";
+//	if (!queryDatabase(query)) {
+//		mDb.rollback();
+//		return false;
+//	}
+//
+//	query = "ALTER TABLE expense\n"
+//			"ADD COLUMN month INTEGER REFERENCES month (id) ON DELETE CASCADE";
+//	if (!queryDatabase(query)) {
+//		mDb.rollback();
+//		return false;
+//	}
+//
+//	query = "ALTER TABLE income\n"
+//			"ADD COLUMN month INTEGER REFERENCES month (id) ON DELETE CASCADE";
+//	if (!queryDatabase(query)) {
+//		mDb.rollback();
+//		return false;
+//	}
+//
+//	mDb.commit();
+//	return true;
 }
 
 bool BudgetDbUpdater::queryDatabase(const QString query)

@@ -472,15 +472,16 @@ bool BudgetDbHelper::isDatabaseOutdated()
 
 void BudgetDbHelper::updateDatabaseSchema()
 {
-	BudgetDbUpdater dbUpdater = BudgetDbUpdater(mDb);
+//	BudgetDbUpdater dbUpdater = BudgetDbUpdater(mDb);
 
-	if (mInstalledDbVersion < 2) {
-		if (dbUpdater.toV2()) mInstalledDbVersion = 2;
-	}
+	// TODO: This is sample code for when there is a version 2 of the database
+//	if (mInstalledDbVersion < 2) {
+//		if (dbUpdater.toV2()) mInstalledDbVersion = 2;
+//	}
 
 	// TODO: If their app isn't fully updated at this point (installedDbVersion != latestDbVersion),
 	// maybe alert them or close/restart the app?
 
-	QString query = QString("UPDATE metadata SET value = '%1' WHERE name = 'database_version'").arg(mInstalledDbVersion);
-	queryDatabase(query);
+//	QString query = QString("UPDATE metadata SET value = '%1' WHERE name = 'database_version'").arg(mInstalledDbVersion);
+//	queryDatabase(query);
 }
