@@ -11,8 +11,6 @@ Container {
     property alias image: itemImage.imageSource
     property string itemType
     
-    touchPropagationMode: TouchPropagationMode.Full
-    
     layout: StackLayout {}
     
     Divider {
@@ -23,7 +21,6 @@ Container {
     
     Container {
 	    id: listItemContainer
-	    
 		layout: StackLayout {
 	        orientation: LayoutOrientation.LeftToRight
 	    }
@@ -49,12 +46,16 @@ Container {
             gestureHandlers: [
                 TapHandler {
                     onTapped: {
-                        // Make sure the item they are changing the picture of is selected in the list, so we can update/delete it successfully
-                        //root.parent.select(root.ListItem.indexPath, true);
+                        // Clear the selection first.
+                        root.parent.clearSelection();
+
                         if (itemImage.imageSource == "asset:///images/default.png") {
+                            // Because we cleared the selection already, the touch will propagate to the ListView's onTriggered function which will select the item for us.
                             filePicker.open()
                         } else {
-                        	imageViewerSheet.open();
+                            // For some reason, touches aren't propagated to the ListView's onTriggered function when there's an image displaying. So we have to manually select it.
+                            root.parent.select(root.ListItem.indexPath, true);
+                            imageViewerSheet.open();
                         }
                     }
                 }
@@ -185,8 +186,8 @@ Container {
                 
                 actions: [
                     ActionItem {
-                        title: "Cancel"
-                        imageSource: "asset:///images/cancel.png"
+                        title: "Done"
+                        imageSource: "asset:///images/done.png"
                         ActionBar.placement: ActionBarPlacement.OnBar
                         onTriggered: {
                             imageViewerSheet.close();

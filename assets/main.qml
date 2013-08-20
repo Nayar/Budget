@@ -36,7 +36,7 @@ TabbedPane {
     }
     
     Tab {
-        title: "Monthly Income"
+        title: "Monthly Incomes"
         imageSource: "asset:///images/notes.png"
 
 		BudgetListPage {
