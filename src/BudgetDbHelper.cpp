@@ -317,13 +317,11 @@ int BudgetDbHelper::getMonthId(const QString month, const QString year)
 
 double BudgetDbHelper::getMonthExpenseAmount(const int &month, const int &year)
 {
-	// Make sure to use month + 1 in the query because we store the month integers in the db as their numerical representation (1-12),
-	// not from 0-11 like the Date().getMonth() method returns.
 	QString query = QString("SELECT SUM(amount)\n"
 							"FROM expense, month\n"
 							"WHERE expense.month = month.id\n"
 							"AND month.month = %1\n"
-							"AND month.year = %2").arg(month + 1).arg(year);
+							"AND month.year = %2").arg(month).arg(year);
 
 	QSqlQuery sqlQuery = queryDatabaseWithResult(query);
 
@@ -356,13 +354,11 @@ double BudgetDbHelper::getYearExpenseAmount(const int &year)
 
 double BudgetDbHelper::getMonthIncomeAmount(const int &month, const int &year)
 {
-	// Make sure to use month + 1 in the query because we store the month integers in the db as their numerical representation (1-12),
-	// not from 0-11 like the Date().getMonth() method returns.
 	QString query = QString("SELECT SUM(amount)\n"
 							"FROM income, month\n"
 							"WHERE income.month = month.id\n"
 							"AND month.month = %1\n"
-							"AND month.year= %2").arg(month + 1).arg(year);
+							"AND month.year= %2").arg(month).arg(year);
 
 	QSqlQuery sqlQuery = queryDatabaseWithResult(query);
 

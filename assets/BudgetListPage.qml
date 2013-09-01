@@ -206,17 +206,17 @@ Page {
     
     // This function runs whenever an item in the list is added/updated/deleted.
     function updateOverviewPage() {
-        var currentMonth = new Date().getMonth();
-        var currentYear = new Date().getFullYear();
-        
         if (type == "expense") {
-            overviewPage.currentMonthExpenses = _budgetApp.getMonthExpenseAmount(currentMonth, currentYear);
-            overviewPage.currentYearExpenses = _budgetApp.getYearExpenseAmount(currentYear);
+            overviewPage.monthExpenses = "$" + _budgetApp.getMonthExpenseAmount(overviewPage.selectedMonth, overviewPage.selectedMonthYear);
+            overviewPage.yearExpenses = "$" + _budgetApp.getYearExpenseAmount(overviewPage.selectedYear);
         } else if (type == "income") {
-            overviewPage.currentMonthIncomes = _budgetApp.getMonthIncomeAmount(currentMonth, currentYear);
-            overviewPage.currentYearIncomes = _budgetApp.getYearIncomeAmount(currentYear);
+            overviewPage.monthIncomes = "$" + _budgetApp.getMonthIncomeAmount(overviewPage.selectedMonth, overviewPage.selectedMonthYear);
+            overviewPage.yearIncomes = "$" + _budgetApp.getYearIncomeAmount(overviewPage.selectedYear);
         }
         
+        overviewPage.adjustedMonthIncome = ("$" + (overviewPage.monthIncomes.substring(1) - overviewPage.monthExpenses.substring(1))).replace("$-", "-$");
+        overviewPage.adjustedYearIncome = ("$" + (overviewPage.yearIncomes.substring(1) - overviewPage.yearExpenses.substring(1))).replace("$-", "-$");
+
         nameAdd.text = "";
         amountAdd.text = "";
         addContainer.image = "";

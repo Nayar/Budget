@@ -17,10 +17,6 @@ TabbedPane {
 
         OverviewPage {
             id: overviewPage
-            currentMonthExpenses: _budgetApp.getMonthExpenseAmount(currentMonth, currentYear)
-            currentMonthIncomes: _budgetApp.getMonthIncomeAmount(currentMonth, currentYear)
-            currentYearExpenses: _budgetApp.getYearExpenseAmount(currentYear)
-            currentYearIncomes: _budgetApp.getYearIncomeAmount(currentYear)
         }
     }
     

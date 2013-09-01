@@ -470,32 +470,56 @@ void BudgetApp::populateYearDropDowns(AbstractPane *root)
 	int currentYear = QDate::currentDate().year();
 
 	// Get the earliest entered year in the database
-	int earliestYear = getEarliestExpenseYear();
+	int earliestExpenseYear = getEarliestExpenseYear();
 
 	DropDown *expensesYearDropDown = root->findChild<Container*>("expensesMonthYearDropDowns")->findChild<DropDown*>("yearDropDown");
 	DropDown *expensesYearRangeDropDown = root->findChild<Page*>("expensesPage")->findChild<DropDown*>("yearRange");
 	// Display years starting from earliest year up to five years past the current year
-	for (int i = earliestYear; i <= currentYear + 5; i ++) {
+	for (int i = earliestExpenseYear; i <= currentYear + 5; i ++) {
 		expensesYearDropDown->add(Option::create().text(QString::number(i)).value(QString::number(i)));
 		expensesYearRangeDropDown->add(Option::create().text(QString::number(i)).value(QString::number(i)));
 	}
 
 	// Select the current year by default. We can derive the index from currentYear - earliestYear since we know index 0 will be earliestYear.
-	expensesYearDropDown->setSelectedIndex(currentYear - earliestYear);
-	expensesYearRangeDropDown->setSelectedIndex(currentYear - earliestYear);
+	expensesYearDropDown->setSelectedIndex(currentYear - earliestExpenseYear);
+	expensesYearRangeDropDown->setSelectedIndex(currentYear - earliestExpenseYear);
 
 	// Repeat for incomes DropDowns; get earliest year in the database
-	earliestYear = getEarliestIncomeYear();
+	int earliestIncomeYear = getEarliestIncomeYear();
 
 	DropDown *incomesYearDropDown = root->findChild<Container*>("incomesMonthYearDropDowns")->findChild<DropDown*>("yearDropDown");
 	DropDown *incomesYearRangeDropDown = root->findChild<Page*>("incomesPage")->findChild<DropDown*>("yearRange");
 	// Display years starting from earliest year up to five years past the current year
-	for (int i = earliestYear; i <= currentYear + 5; i ++) {
+	for (int i = earliestIncomeYear; i <= currentYear + 5; i ++) {
 		incomesYearDropDown->add(Option::create().text(QString::number(i)).value(QString::number(i)));
 		incomesYearRangeDropDown->add(Option::create().text(QString::number(i)).value(QString::number(i)));
 	}
 
 	// Select the current year by default. We can derive the index from currentYear - earliestYear since we know index 0 will be earliestYear.
-	incomesYearDropDown->setSelectedIndex(currentYear - earliestYear);
-	incomesYearRangeDropDown->setSelectedIndex(currentYear - earliestYear);
+	incomesYearDropDown->setSelectedIndex(currentYear - earliestIncomeYear);
+	incomesYearRangeDropDown->setSelectedIndex(currentYear - earliestIncomeYear);
+
+	// Populate the Overview Page's year drop downs
+	int earliestYear = earliestExpenseYear;
+	if (earliestIncomeYear < earliestExpenseYear && earliestIncomeYear != 0) {
+		earliestYear = earliestIncomeYear;
+	}
+
+	DropDown *overviewMonthYearDropDown = root->findChild<Container*>("overviewContainer")->findChild<DropDown*>("monthYearDropDown");
+	// Display years starting from earliest year up to five years past the current year
+	for (int i = earliestYear; i <= currentYear + 5; i ++) {
+		overviewMonthYearDropDown->add(Option::create().text(QString::number(i)).value(QString::number(i)));
+	}
+
+	// Select the current year by default. We can derive the index from currentYear - earliestYear since we know index 0 will be earliestYear.
+	overviewMonthYearDropDown->setSelectedIndex(currentYear - earliestYear);
+
+	DropDown *overviewYearDropDown = root->findChild<Container*>("overviewContainer")->findChild<DropDown*>("yearDropDown");
+	// Display years starting from earliest year up to five years past the current year
+	for (int i = earliestYear; i <= currentYear + 5; i ++) {
+		overviewYearDropDown->add(Option::create().text(QString::number(i)).value(QString::number(i)));
+	}
+
+	// Select the current year by default. We can derive the index from currentYear - earliestYear since we know index 0 will be earliestYear.
+	overviewYearDropDown->setSelectedIndex(currentYear - earliestYear);
 }
