@@ -6,8 +6,8 @@ Container {
     
     layout: StackLayout {}
     horizontalAlignment: HorizontalAlignment.Fill
-    topPadding: 20
-    bottomPadding: 20
+    topPadding: 10
+    bottomPadding: 10
     rightPadding: 20
     leftPadding: 20
 

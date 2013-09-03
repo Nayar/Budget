@@ -19,92 +19,151 @@ Page {
 
     property alias selectedYear: yearDropDown.selectedValue
 
-	Container {
-        id: overviewContainer
-        objectName: "overviewContainer"
-        
-        layout: StackLayout {}
-    
-    	Container {
-	        id: monthFilterContainer	
-	        layout: StackLayout {
-            	orientation: LayoutOrientation.LeftToRight
-            }
+	ScrollView {
+     
+		Container {
+	        id: overviewContainer
+	        objectName: "overviewContainer"
 	        
-	    	MonthDropDown {
-	    	    id: monthDropDown
-	    	    objectName: "monthDropDown"
-	    	    title: "Month"
-	    	    
-	            onMonthChanged: {
-	                monthExpenses = "$" + _budgetApp.getMonthExpenseAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
-	                monthIncomes = "$" + _budgetApp.getMonthIncomeAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
-                    adjustedMonthIncome = ("$" + (overviewPage.monthIncomes.substring(1) - overviewPage.monthExpenses.substring(1))).replace("$-", "-$");
+	        layout: StackLayout {}
+	        
+	        Divider {
+	        	topMargin: 0
+	        	bottomMargin: 0
+	        }
+	        
+	        Container {
+	            background: Color.create("#30606060")
+	            topPadding: 20
+	            bottomPadding: 20
+	            
+	            horizontalAlignment: HorizontalAlignment.Fill
+	            
+	            Label {
+	                text: "Monthly Totals"
+	                horizontalAlignment: HorizontalAlignment.Center
+	                textStyle { base: SystemDefaults.TextStyles.TitleText }
 	            }
-	    	}
+	         
+	        }
+	        
+	        Divider {
+	            topMargin: 0
+	            bottomMargin: 5
+	        }
 	    	
-	    	DropDown {
-	    	    id: monthYearDropDown
-	    	    objectName: "monthYearDropDown"
-	    	    title: "Year"
-	    	    
-	            onSelectedValueChanged: {
-	                monthExpenses = "$" + _budgetApp.getMonthExpenseAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
-	                monthIncomes = "$" + _budgetApp.getMonthIncomeAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
-                    adjustedMonthIncome = ("$" + (overviewPage.monthIncomes.substring(1) - overviewPage.monthExpenses.substring(1))).replace("$-", "-$");
+	    	Container {
+		        id: monthFilterContainer
+		        layout: StackLayout {
+	            	orientation: LayoutOrientation.LeftToRight
 	            }
-	    	}
-	    }
-    	
-        TextAndAmount {
-            id: monthExpensesLabels
-            background: Color.create("#30FF0000")
-            text: monthNames[monthDropDown.selectedMonth - 1] + " " + monthYearDropDown.selectedValue + " Expenses"
-        }
-        
-        TextAndAmount {
-            id: monthIncomesLabels
-            background: Color.create("#3000FF00")
-            text: monthNames[monthDropDown.selectedMonth - 1] + " " + monthYearDropDown.selectedValue + " Incomes"
-        }
-        
-        TextAndAmount {
-            id: adjustedMonthIncomeLabels
-            text: monthNames[monthDropDown.selectedMonth - 1] + " " + monthYearDropDown.selectedValue + " Adjusted Income"
-        }
-        
-        DropDown {
-            id: yearDropDown
-            objectName: "yearDropDown"
-            title: "Year"
-            
-            onSelectedValueChanged: {
-                yearExpenses = "$" + _budgetApp.getYearExpenseAmount(yearDropDown.selectedValue);
-                yearIncomes = "$" + _budgetApp.getYearIncomeAmount(yearDropDown.selectedValue);
-                adjustedYearIncome = ("$" + (overviewPage.yearIncomes.substring(1) - overviewPage.yearExpenses.substring(1))).replace("$-", "-$");
-            }
-        }
-        
-        TextAndAmount {
-            id: yearExpensesLabel
-            background: Color.create("#30FF0000")
-            text: yearDropDown.selectedValue + " Total Expenses"
-        }
-        
-        TextAndAmount {
-            id: yearIncomesLabel
-            background: Color.create("#3000FF00")
-            text: yearDropDown.selectedValue + " Total Incomes"
-        }
-        
-        TextAndAmount {
-            id: adjustedYearIncomeLabels
-            text: yearDropDown.selectedValue + " Total Adjusted Income"
-        }
-        
-        onCreationCompleted: {
-            monthNames = [ "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December" ];
-        }
+		        
+		        bottomMargin: 5
+		        
+		    	MonthDropDown {
+		    	    id: monthDropDown
+		    	    objectName: "monthDropDown"
+		    	    title: "Month"
+		    	    
+		            onMonthChanged: {
+		                monthExpenses = "$" + _budgetApp.getMonthExpenseAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
+		                monthIncomes = "$" + _budgetApp.getMonthIncomeAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
+	                    adjustedMonthIncome = ("$" + (overviewPage.monthIncomes.substring(1) - overviewPage.monthExpenses.substring(1))).replace("$-", "-$");
+		            }
+		    	}
+		    	
+		    	DropDown {
+		    	    id: monthYearDropDown
+		    	    objectName: "monthYearDropDown"
+		    	    title: "Year"
+		    	    
+		            onSelectedValueChanged: {
+		                monthExpenses = "$" + _budgetApp.getMonthExpenseAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
+		                monthIncomes = "$" + _budgetApp.getMonthIncomeAmount(monthDropDown.selectedMonth, monthYearDropDown.selectedValue);
+	                    adjustedMonthIncome = ("$" + (overviewPage.monthIncomes.substring(1) - overviewPage.monthExpenses.substring(1))).replace("$-", "-$");
+		            }
+		    	}
+		    }
+	    	
+	        TextAndAmount {
+	            id: monthExpensesLabels
+	            background: Color.create("#30FF0000")
+	            text: monthNames[monthDropDown.selectedMonth - 1] + " " + monthYearDropDown.selectedValue + " Expenses"
+	        }
+	        
+	        TextAndAmount {
+	            id: monthIncomesLabels
+	            background: Color.create("#3000FF00")
+	            text: monthNames[monthDropDown.selectedMonth - 1] + " " + monthYearDropDown.selectedValue + " Incomes"
+	        }
+	        
+	        TextAndAmount {
+	            id: adjustedMonthIncomeLabels
+	            background: Color.create("#30FFFF00")
+	            text: monthNames[monthDropDown.selectedMonth - 1] + " " + monthYearDropDown.selectedValue + " Adjusted Income"
+	        }
+	        
+	        Divider {
+	            topMargin: 5
+	            bottomMargin: 0
+	        }
+	        
+	        Container {
+	            background: Color.create("#30606060")
+	            topPadding: 20
+	            bottomPadding: 20
+	            
+	            horizontalAlignment: HorizontalAlignment.Fill
+	            
+	            Label {
+	                text: "Yearly Totals"
+	                textStyle { base: SystemDefaults.TextStyles.TitleText }
+	                horizontalAlignment: HorizontalAlignment.Center
+	            }
+	        }
+	        
+	        Divider {
+	            topMargin: 0
+	            bottomMargin: 5
+	        }
+	        
+	        DropDown {
+	            id: yearDropDown
+	            objectName: "yearDropDown"
+	            title: "Year"
+	            topMargin: 0
+	            bottomMargin: 5
+	            
+	            onSelectedValueChanged: {
+	                yearExpenses = "$" + _budgetApp.getYearExpenseAmount(yearDropDown.selectedValue);
+	                yearIncomes = "$" + _budgetApp.getYearIncomeAmount(yearDropDown.selectedValue);
+	                adjustedYearIncome = ("$" + (overviewPage.yearIncomes.substring(1) - overviewPage.yearExpenses.substring(1))).replace("$-", "-$");
+	            }
+	        }
+	        
+	        TextAndAmount {
+	            id: yearExpensesLabel
+	            background: Color.create("#30FF0000")
+	            text: yearDropDown.selectedValue + " Total Expenses"
+	        }
+	        
+	        TextAndAmount {
+	            id: yearIncomesLabel
+	            background: Color.create("#3000FF00")
+	            text: yearDropDown.selectedValue + " Total Incomes"
+	        }
+	        
+	        TextAndAmount {
+	            id: adjustedYearIncomeLabels
+	            background: Color.create("#30FFFF00")
+	            text: yearDropDown.selectedValue + " Total Adjusted Income"
+	        }
+	        
+	        onCreationCompleted: {
+	            monthNames = [ "January", "February", "March", "April", "May", "June",
+	            "July", "August", "September", "October", "November", "December" ];
+	        }
+		}
+		
 	}
 }
